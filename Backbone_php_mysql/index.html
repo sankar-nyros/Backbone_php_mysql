@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Addressbook - Backbone</title>
+		<link href="Assets/CSS/bootstrap.css" rel="stylesheet">
+  		<link href="Assets/CSS/bootstrap-responsive.css" rel="stylesheet">
+		<link href="Assets/CSS/addressbook.css" rel="stylesheet">
+		<link href="Assets/CSS/jquery.dataTables.css" rel="stylesheet">
+	
+		<script type="text/javascript" src="Assets/JS/jquery.js"></script>
+		<script type="text/javascript" src="Assets/JS/underscore.js"></script>
+		<script type="text/javascript" src="Assets/JS/backbone.js"></script>
+		<script type="text/javascript" src="Assets/JS/jquery.confirm.js"></script>
+		<script type="text/javascript" src="Assets/JS/jquery.dataTables.min.js"></script>
+	</head>
+
+	<body>
+		<div class="container">
+			<!-- Row start -->
+			<div class="row">
+				<div class="navbar navbar-inverse">
+					<div class="navbar-inner">
+					<a class="brand"  href="">Address Book</a>
+					
+					<ul class="nav">
+                  		<li><a href="#new_address">New</a></li>
+                  		<li><a href="#directory">Directory</a></li>
+                  	</ul>
+                  		
+					</div>
+				</div>
+			</div>
+			<!-- Row End -->
+			
+			<div class='data'></div>
+			
+			<!-- Form for new address entry -->
+			
+			<script type="text/template" id="addAddressTemplate">
+			<br />
+			<h3><%= $.isEmptyObject(address) ? 'New' : 'Update' %> Address</h3>
+			<div style="width:80%;">
+			    <form class="form-horizontal" id="newcontactform">
+					<div class="control-group">
+						<label class="control-label" for="inputEmail">Name</label>
+						<div class="controls">
+							<input type="text" id="name" placeholder="Name" name="name" class="left" 
+							  value="<%= !$.isEmptyObject(address) ? address.name : '' %>" >
+							<label class="err false name">Please enter name</label>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="inputEmail">Email</label>
+						<div class="controls">
+							<input type="text" id="email" placeholder="Email" name="email" class="left"
+							value="<%= !$.isEmptyObject(address) ? address.email : '' %>"> 
+							<label class="err false email">Please enter email</label>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="inputEmail">Phone</label>
+						<div class="controls">
+							<input type="text" id="phone" placeholder="Phone" name="phone" class="left"
+							value="<%= !$.isEmptyObject(address) ? address.phone : '' %>">
+							<label class="err false phone">Please enter phone</label>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="inputEmail">Address</label>
+						<div class="controls">
+							<textarea id="address" Placeholder="Address" name="address" class="left"><%= !$.isEmptyObject(address) ? address.address : '' %></textarea>
+							<label class="err false address">Please enter address</label>
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<div class="controls">
+							<button type="submit" class="btn btn-success">
+							<%= $.isEmptyObject(address) ? 'Save' : 'Update' %> Entry
+							</button>
+							<a class="btn btn-inverse" href="<%= $.isEmptyObject(address) ? '' : '#directory' %>">Cancel</a>
+							
+						</div>
+					</div>
+					<input type='hidden' id='id' class='input' value="<%= !$.isEmptyObject(address) ? address.id : '' %>"/>
+				</form>
+				<div class="Msg"></div>
+    		</div>
+			</script>
+			
+			
+			<script type="text/template" id="directoryTemplate">
+			<br />
+			<div>
+				<div class="span9"><h3>Directory</h3></div>
+			 	<div class="span2" style="margin-top:10px;">
+			 		<form class="navbar-search pull-left" action="">
+			 			<input type="text" class="search-query span2 ch" placeholder="Search"  								   onfocus="this.value = this.value;"  value="<%=  $.isEmptyObject(input) ? '' : input %>">
+			 		</form>
+			 	</div>
+			</div>
+			<table class="table table-striped" id="addressTable">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Phone</th>
+						<th>Address</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					  <% if( $.isEmptyObject(addresses) ){ %>
+                          <tr><td colspan='5'>No data found</td></tr>
+
+                      <% } else { 
+                         $.each(addresses,function(){  
+                       %>
+                        <tr data-id=<%= this.id %>>
+                          <td> </td>
+                          <td><%= this.name %></td>
+                          <td><%= this.email %></td>
+                          <td><%= this.phone %></td>
+                          <td><%= this.address %></td>
+                          <td><a class="edit"><i class="icon icon-edit ic-r"></i></a> 
+                          	  <a class="delete confirm"><i class="icon icon-trash ic-l"></i></a></td>
+                        </tr>   
+                        <% })
+                      } %>
+				</tbody>
+			</table>
+			
+			
+			</script>
+			
+		    </div>
+			<script type="text/javascript" src="Assets/JS/bootstrap.js"></script>
+			<script type="text/javascript" src="Assets/JS/addressbook.js"></script>
+			<script type="text/javascript" src="Assets/JS/address_validations.js"></script>
+			
+	</body>
+
+</html>

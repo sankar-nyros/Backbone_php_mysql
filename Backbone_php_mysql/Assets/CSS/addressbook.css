@@ -1,0 +1,37 @@
+.left{
+float:left;
+}
+
+.err{
+float:left;
+color: red;
+margin-left: 10px;
+margin-top: 4px;
+}
+.false{
+display:none;
+}
+.true{
+display:block;
+}
+a:hover{
+cursor:pointer;
+}
+.ic-l{
+margin-left:5px;
+}
+.ic-r{
+margin-right:10px;
+margin-left: 5px;
+}
+
+.pointer{
+margin-top: 15px;
+margin-left: -25px;
+}
+
+.ch:focus
+{
+background-color: #515151;
+color:white;
+}
