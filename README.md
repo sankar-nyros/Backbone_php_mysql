@@ -1,5 +1,5 @@
 Backbone_php_mysql
-==============================
+============================
 
 Simple Backbone app with php and my sql
 
